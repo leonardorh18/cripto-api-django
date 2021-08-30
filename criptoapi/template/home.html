@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+</head>
+<body>
+
+<div align="center">
+    <h2>CriptAPI</h2>
+</div>
+
+
+<div class="container">
+
+    <form id="post-form" method="POST" action="checkview">
+        {% csrf_token %}
+        <label>Cripto Name</label>
+        <input type="text" name="cripto_name" id="cripto_name" width="100px" />
+
+        <input type="submit" value="Price">
+    </form>
+</div>
+
+
+</body>
+
+
+</html>
