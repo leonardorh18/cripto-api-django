@@ -6,17 +6,17 @@ API em django para fazer requisições do preço de criptomoedas, pretendo deixa
 
 ## POR ENQUANTO:
 
-cripto-api-django.herokuapp.com/getPrice/*Cripto code*
+cripto-api-django.herokuapp.com/getPrice/*Cripto name*
   
-para retornar o preço da criptomoeda ex. btc, eth, xlm, xrp
+para retornar o preço da criptomoeda ex. bitcoin, ethereum, stellar
   
 ##------------------------------------------------------
 cripto-api-django.herokuapp.com/getAllinfo/*Cripto code*
   
-para retornar o infos mais completas da criptomoeda ex. btc, eth, xlm, xrp
+para retornar o preço da criptomoeda ex. bitcoin, ethereum, stellar
 
 ##EXEMPLO
 
-cripto-api-django.herokuapp.com/getAllinfo/btc
+cripto-api-django.herokuapp.com/getAllinfo/bitcoin
 
 para retornar infos do bitcoin
