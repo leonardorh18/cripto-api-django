@@ -1,1 +1,1 @@
-web: gunicorn criptoapi/wsgi.py --log-file -
+web: gunicorn criptoapi.wsgi --log-file -
