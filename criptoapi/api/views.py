@@ -53,13 +53,18 @@ def getAllinfo(req, cripto):
         print(infos)
         for idx, info in enumerate(infos):
             infos[idx] = re.sub('\n', '', info.text)
-        about = bs.find('p', {'class': 'card-text'})
-        
+
+        try:
+            about = bs.find('p', {'class': 'card-text'})
+            about = about.text
+        except:
+            about = 'empty'
+
         response = {
             'price': infos[0],
             'marketcap': infos[1],
             '24h volume': infos[2],
-            'about_coin': about.text
+            'about_coin': about
         }
 
     except Exception as e:
