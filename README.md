@@ -14,3 +14,9 @@ para retornar o preço da criptomoeda ex. btc, eth, xlm, xrp
 cripto-api-django.herokuapp.com/getAllinfo/*Cripto code*
   
 para retornar o infos mais completas da criptomoeda ex. btc, eth, xlm, xrp
+
+##EXEMPLO
+
+cripto-api-django.herokuapp.com/getAllinfo/btc
+
+para retornar infos do bitcoin
