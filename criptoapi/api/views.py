@@ -18,59 +18,52 @@ def getPrice(req, cripto):
     
     print('>>>>>>>>>>>>>>>>>>>>>', cripto)
     try:
-        url = 'https://markets.businessinsider.com/currencies/'+cripto+'-usd'
+        url = 'https://www.cointracker.io/price/'+cripto
         html =  requests.get(url)
 
         bs = BeautifulSoup(html.content, 'html.parser')
-        
-        price = bs.find('span', {'class': 'price-section__current-value'})
-        #coin = bs.findAll('h2', {'clas': 'sc-1q9q90x-0 jCInrl h1'})
-        price = price.text
-        print('price-----------------------', price)
+
+        price = bs.find('div', {'class': 'my-auto h4'}).text
+        price = re.sub('\n', '', price)
+        response = {
+        'price': price,
+        'cur': 'usd'
+        }
 
     except Exception as e:
         raise Http404("Cannot get price of "+cripto)
 
-
-    response = {
-        'price': price,
-        'cur': 'usd'
-    }
-
     return JsonResponse(response)
+
+
 
 def getAllinfo(req, cripto):
     
-    
     print('>>>>>>>>>>>>>>>>>>>>>', cripto)
     response = {}
+
     try:
-        url = 'https://markets.businessinsider.com/currencies/'+cripto+'-usd'
+        
+        url = 'https://www.cointracker.io/price/'+cripto
         html =  requests.get(url)
 
         bs = BeautifulSoup(html.content, 'html.parser')
         
-        price = bs.find('span', {'class': 'price-section__current-value'})
-        #coin = bs.findAll('h2', {'clas': 'sc-1q9q90x-0 jCInrl h1'})
-        price = price.text
-        #print('price-----------------------', price)
-        response['price'] = price
-        response['cur'] = 'usd'
-        snapshot = bs.find('div', {'class': 'snapshot'})
-        data_items = snapshot.findAll('div', {'class': 'snapshot__data-item'})
-        for data in data_items:
-            data = data.text.split('\n')[1::]
-
-            for i in range(len(data)):
-                data[i] = re.sub('[\t*\r]', '', data[i])
-                
-            data = data[0:-1]
-            #print(data)
-            #print('-------------')
-            response[data[1]] = data[0]
+        infos = bs.findAll('div', {'class': 'my-auto h4'})
+        print(infos)
+        for idx, info in enumerate(infos):
+            infos[idx] = re.sub('\n', '', info.text)
+        about = bs.find('p', {'class': 'card-text'})
         
-    
+        response = {
+            'price': infos[0],
+            'marketcap': infos[1],
+            '24h volume': infos[2],
+            'about_coin': about.text
+        }
+
     except Exception as e:
+        print(e)
         raise Http404("Cannot get price of "+cripto)
 
 
